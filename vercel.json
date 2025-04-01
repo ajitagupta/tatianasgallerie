@@ -1,0 +1,39 @@
+{
+    "version": 2,
+    "name": "tatianas-galleria",
+    "builds": [
+        {
+            "src": "api/server.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "docs/**",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "index.html",
+            "use": "@vercel/static"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "api/server.js"
+        },
+        {
+            "src": "/docs/(.*)",
+            "dest": "/docs/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/$1"
+        }
+    ],
+    "env": {
+        "STRIPE_SECRET_KEY": "@stripe_secret_key",
+        "NODE_ENV": "production"
+    },
+    "github": {
+        "silent": true
+    }
+}
