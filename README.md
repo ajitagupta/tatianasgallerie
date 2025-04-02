@@ -26,7 +26,7 @@ An online platform showcasing and selling original artworks by Tatiana Venegas, 
 
 ### Frontend
 - HTML
-- Tailwind CSS
+- CSS
 - JavaScript
 
 ### Backend
