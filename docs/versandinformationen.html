@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versandinformationen - Tatiana's Gallerie</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3a3a3a;
+            --accent-color: #c9a66b;
+            --bg-color: #f9f7f4;
+            --text-color: #333;
+            --light-gray: #f1f1f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding-bottom: 50px;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 400;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            padding: 20px 0;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            font-size: 16px;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            margin-left: auto;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 8px; }
+        .hamburger span:nth-child(3) { top: 16px; }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 8px;
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 8px;
+        }
+        
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Main Content Styles */
+        main {
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        main h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        main h2 {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+        }
+        
+        main h3 {
+            font-size: 18px;
+            margin: 20px 0 10px;
+            color: var(--primary-color);
+        }
+        
+        main p {
+            margin-bottom: 15px;
+        }
+        
+        main ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        main li {
+            margin-bottom: 5px;
+        }
+        
+        .highlight-box {
+            background-color: var(--light-gray);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .last-updated {
+            font-style: italic;
+            color: #666;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: right;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: #b08f5a;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin-bottom: 10px;
+        }
+        
+        .footer-content a {
+            color: white;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-content a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            /* Hamburger Menu */
+            .hamburger {
+                display: block;
+                z-index: 101;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 80px 20px 20px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+            
+            nav.active ul {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                display: block;
+                font-size: 18px;
+                padding: 10px 0;
+            }
+            
+            /* Main content adjustments */
+            main {
+                padding: 20px;
+            }
+            
+            main h1 {
+                font-size: 24px;
+            }
+            
+            main h2 {
+                font-size: 20px;
+            }
+            
+            main h3 {
+                font-size: 18px;
+            }
+            
+            .highlight-box {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            main h1 {
+                font-size: 22px;
+            }
+            
+            main h2 {
+                font-size: 18px;
+            }
+            
+            main h3 {
+                font-size: 16px;
+            }
+            
+            .highlight-box {
+                padding: 10px;
+            }
+            
+            .button-container {
+                margin-bottom: 30px;
+            }
+            
+            .last-updated {
+                text-align: left;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .footer-links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay for mobile menu background -->
+    <div class="overlay" id="menu-overlay"></div>
+    
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <h1>Tatiana's <span>Gallerie</span></h1>
+            </div>
+            <button class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="../index.html#products">Gemälde</a></li>
+                    <li><a href="../index.html#about">Über uns</a></li>
+                    <li><a href="../index.html#contact">Kontakt</a></li>
+                    <li><a href="../index.html">Startseite</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <h1>Versandinformationen</h1>
+        
+        <h2>1. Versandgebiete</h2>
+        <p>Wir versenden ausschliesslich innerhalb der Schweiz und nach Liechtenstein. Leider können wir keine internationalen Bestellungen bearbeiten.</p>
+        
+        <h2>2. Versandkosten</h2>
+        <div class="highlight-box">
+            <p><strong>Versandkosten:</strong> CHF 50 pro Kunstwerk</p>
+            <p>Die Versandkosten werden im Bestellprozess separat ausgewiesen und sind bereits bei der Produktpreisangabe nicht enthalten.</p>
+        </div>
+        
+        <h2>3. Versandart</h2>
+        <h3>3.1 Transportdienstleister</h3>
+        <p>Alle Sendungen erfolgen über die Schweizerische Post mit dem Dienst "Paket B". Diese Versandmethode gewährleistet eine sichere und schonende Beförderung unserer empfindlichen Kunstwerke.</p>
+        
+        <h3>3.2 Versandverpackung</h3>
+        <p>Jedes Gemälde wird sorgfältig und professionell verpackt:</p>
+        <ul>
+            <li>Polsterung mit speziellen Kunsttransportpappen</li>
+            <li>Zusätzlicher Schutz durch Luftpolsterfolie</li>
+            <li>Stabile Kartonummantelung</li>
+            <li>Bruchsichere Transportkiste</li>
+        </ul>
+        
+        <h2>4. Lieferzeiten</h2>
+        <p>Die Lieferzeit beträgt in der Regel 5-10 Werktage nach Zahlungseingang. Bei individuellen Auftragsarbeiten oder Massanfertigungen kann die Lieferzeit entsprechend länger sein.</p>
+        
+        <h2>5. Tracking und Versandbestätigung</h2>
+        <p>Nach Versand Ihrer Bestellung erhalten Sie eine E-Mail mit:</p>
+        <ul>
+            <li>Tracking-Nummer</li>
+            <li>Voraussichtlichem Lieferdatum</li>
+            <li>Versanddetails</li>
+        </ul>
+        
+        <h2>6. Lieferung und Annahme</h2>
+        <p>Bei Erhalt der Sendung empfehlen wir Ihnen:</p>
+        <ul>
+            <li>Überprüfen Sie das Paket sofort auf äussere Beschädigungen</li>
+            <li>Öffnen Sie die Verpackung vorsichtig</li>
+            <li>Untersuchen Sie das Kunstwerk auf mögliche Transportschäden</li>
+            <li>Dokumentieren Sie eventuelle Schäden unverzüglich</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p><strong>Kundenservice bei Transportschäden:</strong></p>
+            <p>Bei Beschädigungen kontaktieren Sie uns bitte umgehend unter:</p>
+            <p>E-Mail: service@tatianas-galleria.ch<br>
+            Telefon: +41 44 123 45 67</p>
+        </div>
+        
+        <h2>7. Rücksendungen</h2>
+        <p>Informationen zu Rücksendungen finden Sie in unseren <a href="AGB.html">Allgemeinen Geschäftsbedingungen</a>.</p>
+        
+        <p class="last-updated">Letzte Aktualisierung: 1. April 2025</p>
+        
+        <div class="button-container">
+            <a href="../index.html" class="back-button">Zurück zur Hauptseite</a>
+            <br/><br/>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Tatianas Galleria. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+    
+    <!-- Hamburger Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const nav = document.getElementById('main-nav');
+            const overlay = document.getElementById('menu-overlay');
+            const menuLinks = document.querySelectorAll('#main-nav ul li a');
+            
+            // Toggle menu when hamburger is clicked
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            // Close menu when overlay is clicked
+            overlay.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+            
+            // Close menu when a link is clicked
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+            
+            // Close menu on window resize if screen becomes larger
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

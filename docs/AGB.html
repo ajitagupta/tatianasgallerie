@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allgemeine Geschäftsbedingungen - Tatianas Galleria</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3a3a3a;
+            --accent-color: #c9a66b;
+            --bg-color: #f9f7f4;
+            --text-color: #333;
+            --light-gray: #f1f1f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding-bottom: 50px;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 400;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            padding: 20px 0;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            font-size: 16px;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            margin-left: auto;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 8px; }
+        .hamburger span:nth-child(3) { top: 16px; }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 8px;
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 8px;
+        }
+        
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Main Content Styles */
+        main {
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        main h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        main h2 {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+        }
+        
+        main h3 {
+            font-size: 18px;
+            margin: 20px 0 10px;
+            color: var(--primary-color);
+        }
+        
+        main p {
+            margin-bottom: 15px;
+        }
+        
+        main ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        main li {
+            margin-bottom: 5px;
+        }
+        
+        .highlight-box {
+            background-color: var(--light-gray);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .last-updated {
+            font-style: italic;
+            color: #666;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: right;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: #b08f5a;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin-bottom: 10px;
+        }
+        
+        .footer-content a {
+            color: white;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-content a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            /* Hamburger Menu */
+            .hamburger {
+                display: block;
+                z-index: 101;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 80px 20px 20px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+            
+            nav.active ul {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                display: block;
+                font-size: 18px;
+                padding: 10px 0;
+            }
+            
+            /* Main content adjustments */
+            main {
+                padding: 20px;
+            }
+            
+            main h1 {
+                font-size: 24px;
+            }
+            
+            main h2 {
+                font-size: 20px;
+            }
+            
+            main h3 {
+                font-size: 18px;
+            }
+            
+            .highlight-box {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            main h1 {
+                font-size: 22px;
+            }
+            
+            main h2 {
+                font-size: 18px;
+            }
+            
+            main h3 {
+                font-size: 16px;
+            }
+            
+            .highlight-box {
+                padding: 10px;
+            }
+            
+            .button-container {
+                margin-bottom: 30px;
+            }
+            
+            .last-updated {
+                text-align: left;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .footer-links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay for mobile menu background -->
+    <div class="overlay" id="menu-overlay"></div>
+    
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <h1>Tatianas <span>Galleria</span></h1>
+            </div>
+            <button class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="../index.html#products">Gemälde</a></li>
+                    <li><a href="../index.html#about">Über uns</a></li>
+                    <li><a href="../index.html#contact">Kontakt</a></li>
+                    <li><a href="../index.html">Startseite</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <h1>Allgemeine Geschäftsbedingungen</h1>
+        
+        <h2>1. Allgemeines</h2>
+        <p>Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") gelten für alle Verträge, die über unsere Website www.tatianas-galleria.ch zwischen Tatianas Galleria, Bahnhofstrasse 42, 8001 Zürich, Schweiz (nachfolgend "wir" oder "uns") und unseren Kunden (nachfolgend "Sie") geschlossen werden.</p>
+        
+        <h2>2. Vertragsschluss</h2>
+        <p>Die Darstellung der Produkte im Online-Shop stellt kein rechtlich bindendes Angebot, sondern einen unverbindlichen Online-Katalog dar. Durch Anklicken des Buttons "Bestellung aufgeben" geben Sie eine verbindliche Bestellung der im Warenkorb enthaltenen Waren ab. Die Bestätigung des Eingangs Ihrer Bestellung erfolgt unmittelbar nach dem Absenden der Bestellung durch eine automatisierte E-Mail und stellt noch keine Vertragsannahme dar. Der Kaufvertrag kommt erst durch unsere ausdrückliche Erklärung oder durch Versand der Ware zustande.</p>
+        
+        <h2>3. Preise und Zahlungsbedingungen</h2>
+        
+        <h3>3.1 Preise</h3>
+        <p>Alle angegebenen Preise sind in Schweizer Franken (CHF) und verstehen sich inklusive der gesetzlichen Mehrwertsteuer.</p>
+        
+        <h3>3.2 Versandkosten</h3>
+        <p>Zusätzlich zum Produktpreis fallen Versandkosten in Höhe von CHF 50 pro Artikel an. Die Versandkosten werden im Bestellprozess separat ausgewiesen.</p>
+        
+        <div class="highlight-box">
+            <p><strong>Versandinformation:</strong> Der Versand erfolgt mittels Schweizerische Post, Paket B. Die Versandkosten betragen CHF 50 pro Artikel.</p>
+        </div>
+        
+        <h3>3.3 Zahlungsmethoden</h3>
+        <p>Wir akzeptieren ausschliesslich folgende Zahlungsmethoden:</p>
+        <ul>
+            <li>Kreditkarte (Visa, Mastercard, American Express)</li>
+        </ul>
+        
+        <h2>4. Lieferung</h2>
+        
+        <h3>4.1 Liefergebiet</h3>
+        <p>Wir liefern ausschliesslich in die Schweiz und nach Liechtenstein.</p>
+        
+        <h3>4.2 Lieferzeit</h3>
+        <p>Die Lieferzeit beträgt in der Regel 5-10 Werktage nach Zahlungseingang. Bei Massanfertigungen oder individuellen Auftragsarbeiten kann die Lieferzeit entsprechend länger sein. In diesem Fall werden Sie über die zu erwartende Lieferzeit informiert.</p>
+        
+        <h3>4.3 Versanddienstleister</h3>
+        <p>Der Versand erfolgt über die Schweizerische Post mit dem Dienst "Paket B". Die Versandkosten betragen CHF 50 pro Artikel.</p>
+        
+        <h3>4.4 Gefahrübergang</h3>
+        <p>Die Gefahr des zufälligen Untergangs und der zufälligen Verschlechterung der Ware geht mit der Übergabe an den Transporteur auf Sie über.</p>
+        
+        <h2>5. Eigentumsvorbehalt</h2>
+        <p>Die gelieferte Ware bleibt bis zur vollständigen Bezahlung in unserem Eigentum.</p>
+        
+        <h2>6. Widerrufsrecht</h2>
+        
+        <h3>6.1 Widerrufsfrist</h3>
+        <p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat.</p>
+        
+        <h3>6.2 Ausübung des Widerrufsrechts</h3>
+        <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Tatianas Galleria, Bahnhofstrasse 42, 8001 Zürich, Schweiz, E-Mail: info@tatianas-galleria.ch, Telefon: +41 44 123 45 67) mittels einer eindeutigen Erklärung (z.B. ein mit der Post versandter Brief oder E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren.</p>
+        
+        <h3>6.3 Folgen des Widerrufs</h3>
+        <p>Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschliesslich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstigste Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart.</p>
+        
+        <h2>7. Gewährleistung</h2>
+        <p>Es gelten die gesetzlichen Gewährleistungsrechte.</p>
+        
+        <h2>8. Haftung</h2>
+        <p>Wir haften unbeschränkt für Vorsatz und grobe Fahrlässigkeit sowie nach Massgabe des Produkthaftungsgesetzes. Für leichte Fahrlässigkeit haften wir bei Schäden aus der Verletzung des Lebens, des Körpers und der Gesundheit von Personen.</p>
+        <p>Im Übrigen gilt folgende beschränkte Haftung: Bei leichter Fahrlässigkeit haften wir nur im Falle der Verletzung einer wesentlichen Vertragspflicht, deren Erfüllung die ordnungsgemässe Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung Sie regelmässig vertrauen dürfen. Die Haftung für leichte Fahrlässigkeit ist der Höhe nach beschränkt auf die bei Vertragsschluss vorhersehbaren Schäden, mit deren Entstehung typischerweise gerechnet werden muss.</p>
+        
+        <h2>9. Datenschutz</h2>
+        <p>Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften. Eine ausführliche Erläuterung zum Umgang mit Ihren Daten finden Sie in unserer <a href="datenschutzerklaerung.html">Datenschutzerklärung</a>.</p>
+        
+        <h2>10. Online-Streitbeilegung</h2>
+        <p>Die EU-Kommission stellt eine Plattform für die aussergerichtliche Online-Streitbeilegung (OS-Plattform) bereit, die unter <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a> aufrufbar ist. Unsere E-Mail-Adresse finden Sie in unserem Impressum.</p>
+        <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        
+        <h2>11. Schlussbestimmungen</h2>
+        <p>Auf Verträge zwischen uns und Ihnen findet das Recht der Schweiz unter Ausschluss des UN-Kaufrechts Anwendung.</p>
+        <p>Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden, so wird dadurch die Wirksamkeit der übrigen Bestimmungen nicht berührt.</p>
+        
+        <div class="highlight-box">
+            <p><strong>Kontaktinformation:</strong></p>
+            <p>Tatianas Galleria<br>
+            Tatiana Isabel Venegas<br>
+            Bahnhofstrasse 42<br>
+            8001 Zürich<br>
+            Schweiz</p>
+            
+            <p>E-Mail: info@tatianas-galleria.ch<br>
+            Telefon: +41 44 123 45 67</p>
+        </div>
+        
+        <p class="last-updated">Letzte Aktualisierung: 1. April 2025</p>
+        
+        <div class="button-container">
+            <a href="../index.html" class="back-button">Zurück zur Hauptseite</a>
+            <br/><br/>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Tatianas Galleria. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+    
+    <!-- Hamburger Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const nav = document.getElementById('main-nav');
+            const overlay = document.getElementById('menu-overlay');
+            const menuLinks = document.querySelectorAll('#main-nav ul li a');
+            
+            // Toggle menu when hamburger is clicked
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            // Close menu when overlay is clicked
+            overlay.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+            
+            // Close menu when a link is clicked
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+            
+            // Close menu on window resize if screen becomes larger
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

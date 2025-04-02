@@ -106,6 +106,62 @@
             color: var(--accent-color);
         }
         
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            margin-left: auto;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 8px; }
+        .hamburger span:nth-child(3) { top: 16px; }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 8px;
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 8px;
+        }
+        
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
         /* Hero Section */
         .hero {
             display: flex;
@@ -150,9 +206,11 @@
         }
         
         .product-image {
-            height: 250px;
-            background-size: cover;
+            height: 350px;
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f9f7f4;
         }
         
         .product-info {
@@ -269,38 +327,122 @@
         
         /* Media Queries */
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
+            /* Hamburger Menu */
+            .hamburger {
+                display: block;
+                z-index: 101;
             }
             
             nav ul {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                justify-content: center;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 80px 20px 20px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+            
+            nav.active ul {
+                right: 0;
             }
             
             nav ul li {
-                margin: 0 10px;
+                margin: 15px 0;
+                width: 100%;
             }
             
+            nav ul li a {
+                display: block;
+                font-size: 18px;
+                padding: 10px 0;
+            }
+            
+            .cart-icon {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            
+            /* Product Grid for smaller screens */
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            /* Hero Section */
             .hero h2 {
                 font-size: 28px;
             }
             
+            .hero p {
+                font-size: 16px;
+            }
+            
+            /* Checkout Form */
+            #checkout-form [style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
             .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 24px;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+            
+            .product-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .product-price {
+                margin-bottom: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .footer-links a {
+                margin: 5px 0;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Overlay for mobile menu background -->
+    <div class="overlay" id="menu-overlay"></div>
+    
     <!-- Header -->
     <header>
         <div class="container nav-container">
             <div class="logo">
                 <h1>Tatiana's <span>Gallerie</span></h1>
             </div>
-            <nav>
+            <button class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="main-nav">
                 <ul>
                     <li><a href="#products">Gemälde</a></li>
                     <li><a href="#about">Über uns</a></li>
@@ -328,9 +470,9 @@
         </div>
         
         <div class="product-grid">
-            <!-- Product 1 - Coastal Serenity -->
+            <!-- Product 1 - Sonnenblumen -->
             <div class="product-card">
-                <div class="product-image" style="background-image: url('./images/1.jpg'); background-size: contain; background-repeat: no-repeat; background-color: #f9f7f4;"></div>
+                <div class="product-image" style="background-image: url('./images/1.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Sonnenblumen mit Englischkanne</h3>
                     <p class="product-description">Lebhafte, goldene Sonnenblumen umgeben eine grüne Englischkanne, ein Symbol für Wachstum und Pflege. Die fröhlichen Farben und die Wärme dieses Gemäldes werden jeden Raum zum Leben erwecken.</p>
@@ -341,14 +483,9 @@
                 </div>
             </div>
             
-            <!-- Product 2 - Featuring the uploaded sunflower painting -->
+            <!-- Product 2 - Stillleben mit Glaskrug -->
             <div class="product-card">
-                <div class="product-image" style="background-image: url('./images/2.jpg'); 
-                     background-size: contain; 
-                     background-repeat: no-repeat; 
-                     background-position: center;
-                     background-color: #f9f7f4;
-                     height: 300px; /* Höhe erhöht */"></div>
+                <div class="product-image" style="background-image: url('./images/2.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Stillleben mit Glaskrug und Früchten</h3>
                     <p class="product-description">Eine hervorragende Komposition voller Licht und Transparenz, getönt durch die Farben der Früchte. Der kristallklare Glaskrug im Zentrum wird von saftigen Orangen und einem goldenen Apfel auf warmem, rostrotem Untergrund umrahmt. Der grüne Hintergrund verstärkt die Frische und Lebendigkeit dieses eleganten Stilllebens.</p>
@@ -359,15 +496,9 @@
                 </div>
             </div>
             
-            <!-- Product 3 -->
+            <!-- Product 3 - Teeservice -->
             <div class="product-card">
-                <div class="product-image" style="
-                    height: 350px; 
-                    background-image: url('./images/3.jpg'); 
-                    background-size: contain; 
-                    background-position: center; 
-                    background-repeat: no-repeat; 
-                    background-color: #f9f7f4;"></div>
+                <div class="product-image" style="background-image: url('./images/3.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Blaues Teeservice mit Orangen</h3>
                     <p class="product-description">Die kontrastreiche blaue Farbgebung und die Anordnung der Teekannen schaffen eine zauberhafte Atmosphäre für eine Stunde köstlichen Teegenusses.</p>
@@ -378,15 +509,9 @@
                 </div>
             </div>
 
-            <!-- Product 4 -->
+            <!-- Product 4 - Herbstbaum -->
             <div class="product-card">
-                <div class="product-image" style="
-                    height: 350px; 
-                    background-image: url('./images/4.jpg'); 
-                    background-size: contain; 
-                    background-position: center; 
-                    background-repeat: no-repeat; 
-                    background-color: #f9f7f4;"></div>
+                <div class="product-image" style="background-image: url('./images/4.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Herbstbaum mit Blätterteppich</h3>
                     <p class="product-description">Im Herbst bedecken bunte Blätter in warmen Orange-, Rot- und Gelbtönen den Boden rund um den majestätischen Baum und bereiten die Natur auf die kalte Jahreszeit vor. Die kontrastreiche Komposition zwischen dem kräftigen Blau des Himmels, dem strukturierten Stamm und dem lebendigen Blättermosaik fängt die besondere Schönheit des Herbstes ein.</p>
@@ -397,18 +522,12 @@
                 </div>
             </div>
 
-            <!-- Product 5 -->
+            <!-- Product 5 - Glaskrug mit Rosen -->
             <div class="product-card">
-                <div class="product-image" style="
-                    height: 350px; 
-                    background-image: url('./images/5.jpg'); 
-                    background-size: contain; 
-                    background-position: center; 
-                    background-repeat: no-repeat; 
-                    background-color: #f9f7f4;"></div>
+                <div class="product-image" style="background-image: url('./images/5.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Glaskrug mit Rosen und Erdbeeren</h3>
-                    <p class="product-description">Es ist die Ruhe eines Glasgefäßes mit subtiler Transparenz, während die Blumen und Früchte den Raum einnehmen und mit einer farbenfrohen Tischdecke harmonieren. Die zarten rosa Rosen und leuchtend roten Erdbeeren bilden einen reizvollen Kontrast zum klaren Glas und dem sonnigen gelben Hintergrund.</p>
+                    <p class="product-description">Es ist die Ruhe eines Glasgefässes mit subtiler Transparenz, während die Blumen und Früchte den Raum einnehmen und mit einer farbenfrohen Tischdecke harmonieren. Die zarten rosa Rosen und leuchtend roten Erdbeeren bilden einen reizvollen Kontrast zum klaren Glas und dem sonnigen gelben Hintergrund.</p>
                     <div class="product-meta">
                         <span class="product-price">CHF 600</span>
                         <button class="btn">In den Warenkorb</button>
@@ -416,15 +535,9 @@
                 </div>
             </div>
 
-            <!-- Product 6 -->
+            <!-- Product 6 - KeyCross -->
             <div class="product-card">
-                <div class="product-image" style="
-                    height: 350px; 
-                    background-image: url('./images/6.jpg'); 
-                    background-size: contain; 
-                    background-position: center; 
-                    background-repeat: no-repeat; 
-                    background-color: #f9f7f4;"></div>
+                <div class="product-image" style="background-image: url('./images/6.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Stillleben KeyCross</h3>
                     <p class="product-description">Die vier Elemente verbinden sich in Farbe und Bewegung mit dem geometrischen Hintergrund. Die lebendigen Früchte und das Gefäss schweben vor einem farbenfrohen Mosaik aus Rechtecken und Quadraten. Das Spiel zwischen organischen Formen und geometrischen Mustern schafft eine dynamische Komposition voller Energie und Kontrast.</p>
@@ -434,6 +547,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     
     <!-- About Section -->
@@ -584,7 +698,96 @@
         </div>
     </footer>
     
-    <script src="shoppingcart.js"></script>
-    <script src="payment.js"></script>
-    </body>
+<!-- Scripts -->
+<script src="shoppingcart.js"></script>
+<script src="payment.js"></script>
+
+<!-- Hamburger Menu Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger-menu');
+        const nav = document.getElementById('main-nav');
+        const overlay = document.getElementById('menu-overlay');
+        const menuLinks = document.querySelectorAll('#main-nav ul li a');
+        
+        // Toggle menu when hamburger is clicked
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+        
+        // Close menu when overlay is clicked
+        overlay.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
+        
+        // Close menu when a link is clicked
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+        
+        // Close menu on window resize if screen becomes larger
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === "#cart") {
+                    // Show cart section
+                    document.querySelectorAll('section').forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    document.querySelector(targetId).style.display = 'block';
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // Normal scrolling to section
+                    const target = document.querySelector(targetId);
+                    if(target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Shopping cart continue button
+        const continueShoppingBtn = document.getElementById('continue-shopping-btn');
+        if(continueShoppingBtn) {
+            continueShoppingBtn.addEventListener('click', function() {
+                document.getElementById('cart').style.display = 'none';
+                document.getElementById('products').style.display = 'block';
+                window.scrollTo({
+                    top: document.getElementById('products').offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    });
+</script>
+</body>
 </html>
