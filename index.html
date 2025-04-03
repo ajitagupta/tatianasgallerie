@@ -283,6 +283,104 @@
             align-items: center;
         }
         
+        /* Contact Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(201, 166, 107, 0.2);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .required:after {
+            content: "*";
+            color: #e53935;
+            margin-left: 4px;
+        }
+
+        .form-submit {
+            width: 100%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background-color: #b08f5a;
+        }
+
+        .form-submit:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* Notification container */
+        #notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        /* Notification styles */
+        .notification {
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .notification.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .notification.error {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Form feedback styles */
+        .form-feedback {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .form-feedback.error {
+            color: #f44336;
+        }
+
+        .form-feedback.success {
+            color: #4CAF50;
+        }        
+
+
         /* Footer */
         footer {
             background-color: var(--primary-color);
@@ -567,20 +665,23 @@
             <h2>Kontakt</h2>
         </div>
         <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <form>
-                <div style="margin-bottom: 20px;">
-                    <label for="name" style="display: block; margin-bottom: 5px;">Name</label>
-                    <input type="text" id="name" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name" class="form-label required">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                    <div class="form-feedback" id="name-feedback"></div>
                 </div>
-                <div style="margin-bottom: 20px;">
-                    <label for="email" style="display: block; margin-bottom: 5px;">E-Mail</label>
-                    <input type="email" id="email" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                <div class="form-group">
+                    <label for="email" class="form-label required">E-Mail</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                    <div class="form-feedback" id="email-feedback"></div>
                 </div>
-                <div style="margin-bottom: 20px;">
-                    <label for="message" style="display: block; margin-bottom: 5px;">Nachricht</label>
-                    <textarea id="message" rows="5" style="width: 100%; padding: 10px; border: 1px solid #ddd;"></textarea>
+                <div class="form-group">
+                    <label for="message" class="form-label required">Nachricht</label>
+                    <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+                    <div class="form-feedback" id="message-feedback"></div>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Nachricht senden</button>
+                <button type="submit" class="form-submit">Nachricht senden</button>
             </form>
         </div>
     </section>
@@ -701,6 +802,7 @@
 <!-- Scripts -->
 <script src="shoppingcart.js"></script>
 <script src="payment.js"></script>
+<script src="contactform.js"></script>
 
 <!-- Hamburger Menu Script -->
 <script>
