@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatiana's Gallerie - Seite 2</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3a3a3a;
+            --accent-color: #c9a66b;
+            --bg-color: #f9f7f4;
+            --text-color: #333;
+            --light-gray: #f1f1f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding-bottom: 50px;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 400;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        img {
+            max-width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #b08f5a;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            padding: 20px 0;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            font-size: 16px;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            margin-left: auto;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 8px; }
+        .hamburger span:nth-child(3) { top: 16px; }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 8px;
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 8px;
+        }
+        
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 350px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f9f7f4;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-size {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            background-color: var(--light-gray);
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }        
+
+        .product-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .product-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .pagination a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--primary-color);
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .pagination a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .pagination a.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            margin-left: 30px;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 28px;
+            color: var(--primary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            /* Hamburger Menu */
+            .hamburger {
+                display: block;
+                z-index: 101;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 80px 20px 20px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+            
+            nav.active ul {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                display: block;
+                font-size: 18px;
+                padding: 10px 0;
+            }
+            
+            .cart-icon {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            
+            /* Product Grid for smaller screens */
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+            
+            .product-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .product-price {
+                margin-bottom: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .footer-links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay for mobile menu background -->
+    <div class="overlay" id="menu-overlay"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <h1>Tatiana's <span>Gallerie</span></h1>
+            </div>
+            <button class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html#products">Gemälde</a></li>
+                    <li><a href="index.html#about">Über uns</a></li>
+                    <li><a href="index.html#contact">Kontakt</a></li>
+                    <li class="cart-icon">
+                        <a href="index.html#cart">🛒</a>
+                        <span class="cart-count">0</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Products Section -->
+    <section id="products" class="container" style="margin-top: 40px;">
+        <div class="section-title">
+            <h2>Weitere Gemälde</h2>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Product 16 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/16.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Herbstlicher Blumenstrauss</h3>
+                    <div class="product-size">50cm x 40cm</div>
+                    <p class="product-description">Eine farbenprächtige Komposition aus herbstlichen Blumen in einer antiken Vase. Die warmen Orange-, Rot- und Goldtöne spiegeln die Schönheit und Fülle der Herbstsaison wider.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 580</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 17 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/17.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Stillleben mit Kupferkanne</h3>
+                    <div class="product-size">45cm x 35cm</div>
+                    <p class="product-description">Eine harmonische Komposition mit einer antiken Kupferkanne, frischen Äpfeln und einem feinen Porzellanservice auf einer bestickten Tischdecke. Die warmen Metalltöne kontrastieren wunderschön mit dem kühlen Weiss des Porzellans.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 520</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 18 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/18.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Alpenwiesenzauber</h3>
+                    <div class="product-size">60cm x 40cm</div>
+                    <p class="product-description">Eine sommerliche Schweizer Alpenwiese mit einer Fülle von bunten Wildblumen vor dem majestätischen Panorama der Berge. Das intensive Blau des Himmels und die leuchtenden Farben der Blumen vermitteln ein Gefühl von Freiheit und natürlicher Schönheit.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 650</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 19 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/19.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Kristallgläser im Sonnenlicht</h3>
+                    <div class="product-size">40cm x 50cm</div>
+                    <p class="product-description">Eine beeindruckende Studie von Licht und Transparenz mit einer Anordnung von Kristallgläsern, die das einfallende Sonnenlicht in funkelnden Regenbögen brechen. Die meisterhafte Darstellung der Lichtreflexionen zeigt die technische Brillanz der Künstlerin.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 600</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 20 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/20.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Dorfplatz in Graubünden</h3>
+                    <div class="product-size">70cm x 50cm</div>
+                    <p class="product-description">Eine malerische Ansicht eines traditionellen Schweizer Dorfplatzes mit historischen Häusern und einem alten Brunnen. Die charakteristische Architektur mit Sgraffito-Verzierungen und der lebendige Kontrast zwischen Schatten und Sonnenlicht schaffen eine einladende Atmosphäre.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 780</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 21 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/21.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Gläserne Transparenz</h3>
+                    <div class="product-size">45cm x 35cm</div>
+                    <p class="product-description">Eine raffinierte Komposition aus verschiedenen Glasgefässen und -objekten, die das Licht in faszinierenden Mustern einfangen und reflektieren. Die subtilen Farbübergänge und die präzise Darstellung der Transparenz zeugen von höchster technischer Meisterschaft.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 550</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 22 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/22.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Sommerlicher Obstteller</h3>
+                    <div class="product-size">50cm x 40cm</div>
+                    <p class="product-description">Eine üppige Anordnung frischer Sommerfrüchte – saftige Pfirsiche, Aprikosen, Trauben und Beeren – auf einem handgefertigten Keramikteller. Die lebendigen Farben und die sorgfältige Wiedergabe der unterschiedlichen Texturen lassen das Wasser im Mund zusammenlaufen.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 540</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 23 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/23.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Winterabend am See</h3>
+                    <div class="product-size">60cm x 40cm</div>
+                    <p class="product-description">Eine zauberhafte Winterlandschaft am Ufer des Zürichsees bei Sonnenuntergang. Die pastellfarbene Abenddämmerung spiegelt sich im ruhigen Wasser, während verschneite Bäume den Vordergrund säumen und ferne Lichter am gegenüberliegenden Ufer einen Hauch von menschlicher Präsenz vermitteln.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 680</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 24 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/24.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Blumengarten im Frühling</h3>
+                    <div class="product-size">70cm x 50cm</div>
+                    <p class="product-description">Ein farbenfrohes Porträt eines blühenden Gartens im Frühling, mit Tulpen, Narzissen und Hyazinthen in leuchtenden Farben. Die lockere, impressionistische Pinselführung vermittelt die Lebendigkeit und das Erwachen der Natur nach dem langen Winter.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 720</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 25 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/25.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Tanztee am Nachmittag</h3>
+                    <div class="product-size">55cm x 45cm</div>
+                    <p class="product-description">Eine gemütliche Szene mit einem elegant gedeckten Teetisch, feinem Porzellan und köstlichen Petit Fours. Die sanften Pastelltöne und das weiche Licht schaffen eine Atmosphäre von Eleganz und Nostalgie, die an die Tradition des Nachmittagstees erinnert.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 620</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 26 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/26.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Mediterranes Stillleben</h3>
+                    <div class="product-size">50cm x 60cm</div>
+                    <p class="product-description">Eine sonnendurchflutete Komposition mit Zitrusfrüchten, einer antiken Olivenölflasche und frischen Kräutern auf einem rustikalen Holztisch. Die warmen Terrakotta- und Goldtöne und das intensive Licht vermitteln die Atmosphäre eines sonnigen Tages in der Toskana oder der Provence.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 650</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 27 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/27.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Alte Dorfgasse im Schnee</h3>
+                    <div class="product-size">60cm x 40cm</div>
+                    <p class="product-description">Eine verträumte Winterszene einer engen Gasse in einem traditionellen Schweizer Dorf nach einem frischen Schneefall. Die alten Fachwerkhäuser, die mit Schnee bedeckten Dächer und die warmen Lichter in den Fenstern schaffen eine märchenhafte Atmosphäre voller Charme und Gemütlichkeit.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 680</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 28 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/28.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Rosen in kobaltblauer Vase</h3>
+                    <div class="product-size">45cm x 55cm</div>
+                    <p class="product-description">Ein elegantes Arrangement von frisch geschnittenen Rosen in verschiedenen Rosa- und Rottönen in einer markanten kobaltblauen Vase. Der dramatische Kontrast zwischen dem tiefen Blau der Vase und den zarten Blütenfarben wird durch einen neutralen Hintergrund noch verstärkt.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 590</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 29 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/29.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Kirschblüten im Frühling</h3>
+                    <div class="product-size">70cm x 50cm</div>
+                    <p class="product-description">Eine poetische Darstellung eines blühenden Kirschbaums vor einem klaren Frühlingshimmel. Die zarten rosa Blüten und die feine Struktur der Zweige sind mit ausserordentlicher Präzision und Sensibilität wiedergegeben, während einzelne Blütenblätter sanft zu Boden schweben.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 750</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 30 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/30.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Kathedrale im Regenlicht</h3>
+                    <div class="product-size">80cm x 60cm</div>
+                    <p class="product-description">Eine atmosphärische Ansicht des Grossmünsters in Zürich an einem regnerischen Tag. Die nassen Pflastersteine reflektieren das Licht, während die gotische Architektur vor einem dramatischen Himmel aufragt. Die gedämpften Farben und das diffuse Licht schaffen eine kontemplative Stimmung voller historischer Tiefe.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 850</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="index.html">1</a>
+            <a href="paintings2.html" class="active">2</a>
+            <a href="paintings3.html">3</a>
+            <a href="paintings4.html">4</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Tatiana's Gallerie. Alle Rechte vorbehalten.</p>
+            <div class="footer-links">
+                <a href="docs/datenschutzerklaerung.html" target="_blank">Datenschutzerklärung</a>
+                <a href="docs/AGB.html" target="_blank">Allgemeine Geschäftsbedingungen</a>
+                <a href="docs/versandinformationen.html">Versandinformationen</a>
+            </div>
+        </div>
+    </footer>
+    
+<!-- Scripts -->
+<script src="shoppingcart.js"></script>
+<script src="payment.js"></script>
+<script src="contactform.js"></script>
+
+<!-- Hamburger Menu Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger-menu');
+        const nav = document.getElementById('main-nav');
+        const overlay = document.getElementById('menu-overlay');
+        const menuLinks = document.querySelectorAll('#main-nav ul li a');
+        
+        // Toggle menu when hamburger is clicked
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+        
+        // Close menu when overlay is clicked
+        overlay.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
+        
+        // Close menu when a link is clicked
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+        
+        // Close menu on window resize if screen becomes larger
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === "#cart") {
+                    // Show cart section
+                    document.querySelectorAll('section').forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    document.querySelector(targetId).style.display = 'block';
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // Normal scrolling to section
+                    const target = document.querySelector(targetId);
+                    if(target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Shopping cart continue button
+        const continueShoppingBtn = document.getElementById('continue-shopping-btn');
+        if(continueShoppingBtn) {
+            continueShoppingBtn.addEventListener('click', function() {
+                document.getElementById('cart').style.display = 'none';
+                document.getElementById('products').style.display = 'block';
+                window.scrollTo({
+                    top: document.getElementById('products').offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    });
+</script>
+</body>
+</html>           

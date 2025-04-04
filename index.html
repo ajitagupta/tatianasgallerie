@@ -221,7 +221,18 @@
             font-size: 20px;
             margin-bottom: 10px;
         }
-        
+
+        .product-size {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            background-color: var(--light-gray);
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }        
+
         .product-description {
             font-size: 14px;
             color: #666;
@@ -380,6 +391,38 @@
             color: #4CAF50;
         }        
 
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .pagination a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--primary-color);
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .pagination a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .pagination a.active {
+            background-color: var(--accent-color);
+            color: white;
+        }       
 
         /* Footer */
         footer {
@@ -573,6 +616,7 @@
                 <div class="product-image" style="background-image: url('./images/1.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Sonnenblumen mit Englischkanne</h3>
+                    <div class="product-size">70cm x 70cm</div>
                     <p class="product-description">Lebhafte, goldene Sonnenblumen umgeben eine grüne Englischkanne, ein Symbol für Wachstum und Pflege. Die fröhlichen Farben und die Wärme dieses Gemäldes werden jeden Raum zum Leben erwecken.</p>
                     <div class="product-meta">
                         <span class="product-price">CHF 1000</span>
@@ -586,6 +630,7 @@
                 <div class="product-image" style="background-image: url('./images/2.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Stillleben mit Glaskrug und Früchten</h3>
+                    <div class="product-size">50cm x 50cm</div>
                     <p class="product-description">Eine hervorragende Komposition voller Licht und Transparenz, getönt durch die Farben der Früchte. Der kristallklare Glaskrug im Zentrum wird von saftigen Orangen und einem goldenen Apfel auf warmem, rostrotem Untergrund umrahmt. Der grüne Hintergrund verstärkt die Frische und Lebendigkeit dieses eleganten Stilllebens.</p>
                     <div class="product-meta">
                         <span class="product-price">CHF 500</span>
@@ -599,6 +644,7 @@
                 <div class="product-image" style="background-image: url('./images/3.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Blaues Teeservice mit Orangen</h3>
+                    <div class="product-size">30cm x 40cm</div>
                     <p class="product-description">Die kontrastreiche blaue Farbgebung und die Anordnung der Teekannen schaffen eine zauberhafte Atmosphäre für eine Stunde köstlichen Teegenusses.</p>
                     <div class="product-meta">
                         <span class="product-price">CHF 500</span>
@@ -612,6 +658,7 @@
                 <div class="product-image" style="background-image: url('./images/4.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Herbstbaum mit Blätterteppich</h3>
+                    <div class="product-size">40cm x 30cm</div>
                     <p class="product-description">Im Herbst bedecken bunte Blätter in warmen Orange-, Rot- und Gelbtönen den Boden rund um den majestätischen Baum und bereiten die Natur auf die kalte Jahreszeit vor. Die kontrastreiche Komposition zwischen dem kräftigen Blau des Himmels, dem strukturierten Stamm und dem lebendigen Blättermosaik fängt die besondere Schönheit des Herbstes ein.</p>
                     <div class="product-meta">
                         <span class="product-price">CHF 500</span>
@@ -625,6 +672,7 @@
                 <div class="product-image" style="background-image: url('./images/5.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Glaskrug mit Rosen und Erdbeeren</h3>
+                    <div class="product-size">40cm x 30cm</div>
                     <p class="product-description">Es ist die Ruhe eines Glasgefässes mit subtiler Transparenz, während die Blumen und Früchte den Raum einnehmen und mit einer farbenfrohen Tischdecke harmonieren. Die zarten rosa Rosen und leuchtend roten Erdbeeren bilden einen reizvollen Kontrast zum klaren Glas und dem sonnigen gelben Hintergrund.</p>
                     <div class="product-meta">
                         <span class="product-price">CHF 600</span>
@@ -638,6 +686,7 @@
                 <div class="product-image" style="background-image: url('./images/6.jpg');"></div>
                 <div class="product-info">
                     <h3 class="product-title">Stillleben KeyCross</h3>
+                    <div class="product-size">30cm x 30cm</div>
                     <p class="product-description">Die vier Elemente verbinden sich in Farbe und Bewegung mit dem geometrischen Hintergrund. Die lebendigen Früchte und das Gefäss schweben vor einem farbenfrohen Mosaik aus Rechtecken und Quadraten. Das Spiel zwischen organischen Formen und geometrischen Mustern schafft eine dynamische Komposition voller Energie und Kontrast.</p>
                     <div class="product-meta">
                         <span class="product-price">CHF 500</span>
@@ -645,7 +694,141 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Product 7 - Primulas Komposition -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/7.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Primulas Komposition</h3>
+                    <div class="product-size">60cm x 30cm</div>
+                    <p class="product-description">Mit drei auffälligen Farben wird diese Komposition definiert, die dem Frühlingsanfang einen reinen Charakter verleit.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 400</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 8 - ??? -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/8.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">??</h3>
+                    <div class="product-size">40cm x 30cm</div>
+                    <p class="product-description">Im Herbst bedecken bunte Blätter in warmen Orange-, Rot- und Gelbtönen den Boden rund um den majestätischen Baum und bereiten die Natur auf die kalte Jahreszeit vor. Die kontrastreiche Komposition zwischen dem kräftigen Blau des Himmels, dem strukturierten Stamm und dem lebendigen Blättermosaik fängt die besondere Schönheit des Herbstes ein.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 500</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Product 9 - Bahnhof Uznach -->
+             <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/9.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Bahnhof Uznach</h3>
+                    <div class="product-size">60cm x 30cm</div>
+                    <p class="product-description">Lebendige Darstellung des historischen Bahnhofs Uznach mit charakteristischen Steinmauern, gelbem Dekor und rotem Dach. Der türkisblaue Himmel mit hellen Wolken und das frische Grün betonen die fröhliche Atmosphäre dieses lokalen Wahrzeichens.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 500</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>           
+
+             <!-- Product 10 - Flower Power -->
+             <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/10.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Blumenteestunde</h3>
+                    <div class="product-size">60cm x 30cm</div>
+                    <p class="product-description">Farbenfrohes Stillleben mit einem eleganten Arrangement aus Rosen und Gänseblümchen in warmen Gelb- und Rottönen, kombiniert mit Lavendel, Porzellangeschirr und einem Glaskrug. Die lebendige Komposition vermittelt eine einladende Teezeit-Atmosphäre auf tiefblauem Hintergrund.</p>                    
+                    <div class="product-meta">
+                        <span class="product-price">CHF 380</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div> 
+
+             <!-- Product 11 - Abendmahl -->
+             <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/11.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Das Abendmahl</h3>
+                    <div class="product-size">60cm x 30cm</div>
+                    <p class="product-description">Es ist Gründonnerstag. Der Herr spricht: "Frieden hinterlasse ich euch, Frieden gebe ich euch." Jesus und seine zwölf Apostel teilen Brot, Fisch, Wasser und Wein vor einem goldgerahmten Landschaftsbild.</p>                    <div class="product-meta">
+                        <span class="product-price">CHF 3800</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div> 
+
+             <!-- Product 12 - Abendmahl -->
+             <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/12.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Das Abendmahl</h3>
+                    <div class="product-size">60cm x 30cm</div>
+                    <p class="product-description">Es ist Gründonnerstag. Der Herr spricht: "Frieden hinterlasse ich euch, Frieden gebe ich euch." Jesus und seine zwölf Apostel teilen Brot, Fisch, Wasser und Wein vor einem goldgerahmten Landschaftsbild.</p>                    <div class="product-meta">
+                        <span class="product-price">CHF 3800</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div> 
+            
+             <!-- Product 13 - Abendmahl -->
+             <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/13.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Das Abendmahl</h3>
+                    <div class="product-size">60cm x 30cm</div>
+                    <p class="product-description">Es ist Gründonnerstag. Der Herr spricht: "Frieden hinterlasse ich euch, Frieden gebe ich euch." Jesus und seine zwölf Apostel teilen Brot, Fisch, Wasser und Wein vor einem goldgerahmten Landschaftsbild.</p>                    <div class="product-meta">
+                        <span class="product-price">CHF 3800</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>                
+            </div>    
+
+             <!-- Product 14 - Abendmahl -->
+             <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/14.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Das Abendmahl</h3>
+                    <div class="product-size">60cm x 30cm</div>
+                    <p class="product-description">Es ist Gründonnerstag. Der Herr spricht: "Frieden hinterlasse ich euch, Frieden gebe ich euch." Jesus und seine zwölf Apostel teilen Brot, Fisch, Wasser und Wein vor einem goldgerahmten Landschaftsbild.</p>                    <div class="product-meta">
+                        <span class="product-price">CHF 3800</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>   
+
+             <!-- Product 15 - Abendmahl -->
+             <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/15.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Das Abendmahl</h3>
+                    <div class="product-size">60cm x 30cm</div>
+                    <p class="product-description">Es ist Gründonnerstag. Der Herr spricht: "Frieden hinterlasse ich euch, Frieden gebe ich euch." Jesus und seine zwölf Apostel teilen Brot, Fisch, Wasser und Wein vor einem goldgerahmten Landschaftsbild.</p>                    <div class="product-meta">
+                        <span class="product-price">CHF 3800</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div> 
+
+
         </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="index.html" class="active">1</a>
+            <a href="paintings2.html">2</a>
+            <a href="paintings3.html">3</a>
+            <a href="paintings4.html">4</a>
+        </div>
+
+
+
     </section>
     
     <!-- About Section -->

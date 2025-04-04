@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatiana's Gallerie - Seite 3</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3a3a3a;
+            --accent-color: #c9a66b;
+            --bg-color: #f9f7f4;
+            --text-color: #333;
+            --light-gray: #f1f1f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding-bottom: 50px;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 400;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        img {
+            max-width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #b08f5a;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            padding: 20px 0;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            font-size: 16px;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Hamburger Menu Styles */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            margin-left: auto;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 8px; }
+        .hamburger span:nth-child(3) { top: 16px; }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 8px;
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 8px;
+        }
+        
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 350px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f9f7f4;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-size {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            background-color: var(--light-gray);
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }        
+
+        .product-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .product-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .pagination a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--primary-color);
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .pagination a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .pagination a.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            margin-left: 30px;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 28px;
+            color: var(--primary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            /* Hamburger Menu */
+            .hamburger {
+                display: block;
+                z-index: 101;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 80px 20px 20px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+            
+            nav.active ul {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                display: block;
+                font-size: 18px;
+                padding: 10px 0;
+            }
+            
+            .cart-icon {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            
+            /* Product Grid for smaller screens */
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+            
+            .product-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .product-price {
+                margin-bottom: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .footer-links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay for mobile menu background -->
+    <div class="overlay" id="menu-overlay"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <h1>Tatiana's <span>Gallerie</span></h1>
+            </div>
+            <button class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html#products">Gemälde</a></li>
+                    <li><a href="index.html#about">Über uns</a></li>
+                    <li><a href="index.html#contact">Kontakt</a></li>
+                    <li class="cart-icon">
+                        <a href="index.html#cart">🛒</a>
+                        <span class="cart-count">0</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Products Section -->
+    <section id="products" class="container" style="margin-top: 40px;">
+        <div class="section-title">
+            <h2>Gemälde - Seite 3</h2>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Product 31 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/31.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Bergpanorama im Sommer</h3>
+                    <div class="product-size">80cm x 60cm</div>
+                    <p class="product-description">Ein atemberaubender Blick auf die majestätischen Schweizer Alpen im Sommer. Grüne Täler, blühende Alpenwiesen und schneebedeckte Gipfel unter einem strahlend blauen Himmel schaffen eine Sinfonie aus Farben und Formen.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 920</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 32 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/32.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Tulpen in Kristallvase</h3>
+                    <div class="product-size">50cm x 40cm</div>
+                    <p class="product-description">Ein elegantes Arrangement farbenfroher Tulpen in einer kunstvollen Kristallvase. Die lebhaften Blüten in Rot-, Rosa- und Gelbtönen kontrastieren wunderschön mit dem funkelnden Kristall und dem raffinierten Hintergrund.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 580</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 33 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/33.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Venezianische Impression</h3>
+                    <div class="product-size">70cm x 50cm</div>
+                    <p class="product-description">Eine stimmungsvolle Szene aus Venedig mit einem malerischen Kanal, historischen Gebäuden und einer charakteristischen Brücke. Die warmen Farben der Fassaden spiegeln sich im Wasser, während das goldene Licht eines späten Nachmittags alles verzaubert.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 820</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 34 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/34.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Herbstlicher Waldweg</h3>
+                    <div class="product-size">60cm x 45cm</div>
+                    <p class="product-description">Ein verzauberter Waldpfad im Herbst, gesäumt von Bäumen in leuchtenden Gold-, Orange- und Rottönen. Sonnenstrahlen durchbrechen das Blätterdach und schaffen ein magisches Spiel von Licht und Schatten auf dem mit bunten Blättern bedeckten Boden.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 680</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 35 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/35.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Stillleben mit Käse und Wein</h3>
+                    <div class="product-size">55cm x 45cm</div>
+                    <p class="product-description">Eine einladende Komposition mit einer Auswahl feiner Schweizer Käsesorten, einer Flasche Rotwein, knusprigem Brot und frischen Trauben auf einem rustikalen Holztisch. Die reichen Texturen und warmen Farben wecken die Sinne und den Appetit.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 620</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 36 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/36.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Segelboot im Abendlicht</h3>
+                    <div class="product-size">70cm x 50cm</div>
+                    <p class="product-description">Ein einsames Segelboot gleitet über den stillen Zürichsee, umgeben vom goldenen Licht des Sonnenuntergangs. Der dramatische Himmel mit seinen Purpur- und Goldtönen spiegelt sich im ruhigen Wasser und schafft eine Atmosphäre zeitloser Ruhe.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 750</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 37 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/37.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Roter Mohn im Kornfeld</h3>
+                    <div class="product-size">65cm x 45cm</div>
+                    <p class="product-description">Ein strahlendes Sommerfeld mit goldenen Weizenähren, aus denen leuchtend rote Mohnblumen und blaue Kornblumen hervorstechen. Der klare blaue Himmel und die sanfte Bewegung der Halme im Wind vermitteln ein Gefühl von Freiheit und ländlicher Idylle.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 700</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 38 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/38.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Morgennebel am Bergsee</h3>
+                    <div class="product-size">75cm x 50cm</div>
+                    <p class="product-description">Eine mystische Landschaft eines alpinen Sees im frühen Morgenlicht, als zarte Nebelschwaden über dem spiegelglatten Wasser schweben. Die ersten Sonnenstrahlen beleuchten die Spitzen der umgebenden Berge, während der Wald noch im Dämmerlicht ruht.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 780</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 39 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/39.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Pfirsiche und Kupferkanne</h3>
+                    <div class="product-size">45cm x 40cm</div>
+                    <p class="product-description">Eine harmonische Komposition aus einer antiken Kupferkanne und saftig reifen Pfirsichen auf einem dunklen Holztisch. Die warmen Töne des Kupfers ergänzen perfekt die zarten Orangetöne der Früchte, während das dramatische Licht der niederländischen Meister nachempfunden ist.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 550</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 40 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/40.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Wasserfall im Tannenwald</h3>
+                    <div class="product-size">80cm x 60cm</div>
+                    <p class="product-description">Ein kraftvoller Wasserfall stürzt kaskadenartig durch einen dichten Tannenwald. Das kristallklare Wasser schäumt über moosbedeckte Felsen, während einzelne Sonnenstrahlen durch das dichte Blätterdach dringen und magische Lichtreflexe erzeugen.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 890</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 41 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/41.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Orchideen in Glasvase</h3>
+                    <div class="product-size">50cm x 40cm</div>
+                    <p class="product-description">Eine elegante Anordnung exotischer Orchideen in einer schlichten, modernen Glasvase. Die komplexen Formen und die subtilen Farbschattierungen der Blüten werden durch einen neutralen Hintergrund betont, der ihre natürliche Schönheit zur Geltung bringt.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 600</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 42 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/42.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Alte Mühle am Bach</h3>
+                    <div class="product-size">65cm x 45cm</div>
+                    <p class="product-description">Eine nostalgische Darstellung einer historischen Wassermühle an einem plätschernden Bach. Das verwitterte Holz der Mühle, das sich drehende Wasserrad und die idyllische Umgebung mit blühenden Wildblumen schaffen eine zeitlose Atmosphäre ländlicher Romantik.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 720</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 43 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/43.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Stillleben mit Kaffeemühle</h3>
+                    <div class="product-size">45cm x 40cm</div>
+                    <p class="product-description">Eine nostalgische Komposition mit einer antiken Kaffeemühle, frischen Kaffeebohnen und einer dampfenden Tasse Kaffee auf einem rustikalen Holztisch. Die reichen Brauntöne und der Duft von frisch gemahlenem Kaffee scheinen förmlich aus dem Bild zu strömen.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 580</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 44 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/44.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Alpenglühen am Abend</h3>
+                    <div class="product-size">80cm x 50cm</div>
+                    <p class="product-description">Ein spektakuläres Naturschauspiel, wenn die untergehende Sonne die Schweizer Alpengipfel in ein magisches, rötliches Licht taucht. Die dramatischen Farben am Himmel und die majestätischen Silhouetten der Berge schaffen ein unvergessliches Bild alpiner Erhabenheit.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 850</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 45 -->
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('./images/45.jpg');"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Marktszene im Dorf</h3>
+                    <div class="product-size">70cm x 50cm</div>
+                    <p class="product-description">Eine lebendige Darstellung eines traditionellen Schweizer Dorfmarktes mit bunten Ständen, frischem Gemüse, Blumen und Käse. Die fröhliche Atmosphäre mit Händlern und Kunden, die zwischen den Ständen schlendern, vermittelt ein Gefühl von Gemeinschaft und ländlichem Leben.</p>
+                    <div class="product-meta">
+                        <span class="product-price">CHF 780</span>
+                        <button class="btn">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="index.html">1</a>
+            <a href="paintings2.html">2</a>
+            <a href="paintings3.html" class="active">3</a>
+            <a href="paintings4.html">4</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Tatiana's Gallerie. Alle Rechte vorbehalten.</p>
+            <div class="footer-links">
+                <a href="docs/datenschutzerklaerung.html" target="_blank">Datenschutzerklärung</a>
+                <a href="docs/AGB.html" target="_blank">Allgemeine Geschäftsbedingungen</a>
+                <a href="docs/versandinformationen.html">Versandinformationen</a>
+            </div>
+        </div>
+    </footer>
+    
+<!-- Scripts -->
+<script src="shoppingcart.js"></script>
+<script src="payment.js"></script>
+<script src="contactform.js"></script>
+
+<!-- Hamburger Menu Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger-menu');
+        const nav = document.getElementById('main-nav');
+        const overlay = document.getElementById('menu-overlay');
+        const menuLinks = document.querySelectorAll('#main-nav ul li a');
+        
+        // Toggle menu when hamburger is clicked
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+        
+        // Close menu when overlay is clicked
+        overlay.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
+        
+        // Close menu when a link is clicked
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+        
+        // Close menu on window resize if screen becomes larger
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+    });
+</script>
+</body>
+</html>
