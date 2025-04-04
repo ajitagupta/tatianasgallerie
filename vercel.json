@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "tatianas-galleria",
+    "name": "tatianas-gallerie",
     "builds": [
         {
             "src": "api/server.js",
@@ -18,6 +18,18 @@
             "src": "index.html",
             "use": "@vercel/static"
         },
+        {
+            "src": "paintings2.html",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "paintings3.html",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "paintings4.html",
+            "use": "@vercel/static"
+        },                      
         {
             "src": "*.js",
             "use": "@vercel/static"
