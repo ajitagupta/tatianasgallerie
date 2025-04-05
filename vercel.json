@@ -47,7 +47,7 @@
     ],
     "env": {
         "NODE_ENV": "production",
-        "STRIPE_SECRET_KEY": "@stripe-secret-key"  // assumes this is added to Vercel dashboard
+        "STRIPE_SECRET_KEY": "@stripe-secret-key"
     },
     "github": {
         "silent": true
