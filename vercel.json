@@ -19,15 +19,7 @@
             "use": "@vercel/static"
         },
         {
-            "src": "paintings2.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "paintings3.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "paintings4.html",
+            "src": "paintings*.html",
             "use": "@vercel/static"
         }
     ],
