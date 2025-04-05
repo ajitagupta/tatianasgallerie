@@ -47,7 +47,7 @@
     ],
     "env": {
         "NODE_ENV": "production",
-        "STRIPE_SECRET_KEY": "@stripe-secret-key"
+        "STRIPE_SECRET_KEY": "STRIPE_SECRET_KEY"
     },
     "github": {
         "silent": true
