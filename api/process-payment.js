@@ -33,7 +33,8 @@ module.exports = async (req, res) => {
       res.status(200).json({
         success: true,
         message: 'Payment successful',
-        orderId: paymentIntent.metadata.order_id
+        orderId: paymentIntent.metadata.order_id,
+        clientSecret: paymentIntent.client_secret
       });
     } else {
       res.status(200).json({

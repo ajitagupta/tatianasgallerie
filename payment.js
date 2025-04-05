@@ -261,6 +261,10 @@ class PaymentProcessor {
                     const response = await this.createPaymentIntent();
                     const clientSecret = response.clientSecret;
                     
+                    if (!clientSecret) {
+                        throw new Error("Missing clientSecret from backend response.");
+                    }
+
                     // Zahlung bestätigen
                     const result = await this.stripe.confirmCardPayment(clientSecret, {
                         payment_method: {
