@@ -22,7 +22,11 @@ module.exports = async (req, res) => {
       confirm: true,
       receipt_email: customerInfo.email,
       description: 'Tatianas Gallery Purchase',
-      metadata: { order_id: uuidv4() }
+      metadata: { order_id: uuidv4() },
+      automatic_payment_methods: {
+        enabled: true,
+        allow_redirects: 'never'
+      }      
     });
 
     if (paymentIntent.status === 'succeeded') {
