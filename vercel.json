@@ -29,10 +29,6 @@
         {
             "src": "paintings4.html",
             "use": "@vercel/static"
-        },                      
-        {
-            "src": "*.js",
-            "use": "@vercel/static"
         }
     ],
     "routes": [
