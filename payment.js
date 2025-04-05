@@ -302,53 +302,79 @@ class PaymentProcessor {
      * @returns {Promise<Object>} - Response mit clientSecret
      */
     async createPaymentIntent() {
-        // Prefer checkout email, fallback to contact form email
-        const emailInput = 
-            document.getElementById('checkout-email') || 
-            document.getElementById('email');
-        
-        const email = emailInput ? emailInput.value.trim() : '';
-        
-        // Basic email validation
-        if (!email || !email.includes('@')) {
-            throw new Error('Bitte geben Sie eine gültige E-Mail-Adresse ein');
-        }
-        
-        // Create Payment Method
-        const paymentMethodResult = await this.stripe.createPaymentMethod({
-            type: 'card',
-            card: this.card
-        });
-        
-        if (paymentMethodResult.error) {
-            throw new Error(paymentMethodResult.error.message || 'Fehler bei der Erstellung der Zahlungsmethode');
-        }
-        
-        const orderData = {
-            paymentMethodId: paymentMethodResult.paymentMethod.id,
-            amount: window.brushstrokesCart ? window.brushstrokesCart.calculateTotal() : 0,
-            items: window.brushstrokesCart ? window.brushstrokesCart.cart : [],
-            customerInfo: {
-                name: document.getElementById('card-name')?.value || 'Unnamed Customer',
-                email: email
+        try {
+            // Prefer checkout email, fallback to contact form email
+            const emailInput = 
+                document.getElementById('checkout-email') || 
+                document.getElementById('email');
+            
+            const email = emailInput ? emailInput.value.trim() : '';
+            
+            // Basic email validation
+            if (!email || !email.includes('@')) {
+                throw new Error('Bitte geben Sie eine gültige E-Mail-Adresse ein');
             }
-        };
-        
-        // API request to backend
-        const response = await fetch('https://tatianasgallerie.ch/api/process-payment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(orderData)
-        });
-        
-        if (!response.ok) {
-            const errorBody = await response.text();
-            throw new Error(errorBody || 'Fehler beim Erstellen des Payment Intent');
+            
+            // Create Payment Method
+            const paymentMethodResult = await this.stripe.createPaymentMethod({
+                type: 'card',
+                card: this.card
+            });
+            
+            if (paymentMethodResult.error) {
+                throw new Error(paymentMethodResult.error.message || 'Fehler bei der Erstellung der Zahlungsmethode');
+            }
+            
+            const orderData = {
+                paymentMethodId: paymentMethodResult.paymentMethod.id,
+                amount: window.brushstrokesCart ? window.brushstrokesCart.calculateTotal() : 0,
+                items: window.brushstrokesCart ? window.brushstrokesCart.cart : [],
+                customerInfo: {
+                    name: document.getElementById('card-name')?.value || 'Unnamed Customer',
+                    email: email
+                }
+            };
+            
+            // API request to backend
+            try {
+                const response = await fetch('https://tatianasgallerie.ch/api/process-payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+                
+                // Log the full response for debugging
+                console.log('Response status:', response.status);
+                console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+                
+                const responseBody = await response.text();
+                console.log('Response body:', responseBody);
+                
+                if (!response.ok) {
+                    throw new Error(responseBody || 'Fehler beim Erstellen des Payment Intent');
+                }
+                
+                return JSON.parse(responseBody);
+            } catch (fetchError) {
+                console.error('Fetch Error Details:', {
+                    name: fetchError.name,
+                    message: fetchError.message,
+                    stack: fetchError.stack
+                });
+                
+                throw fetchError;
+            }
+        } catch (error) {
+            console.error('Complete Error Details:', {
+                name: error.name,
+                message: error.message,
+                stack: error.stack
+            });
+            
+            throw error;
         }
-        
-        return await response.json();
     }
     
     /**
