@@ -349,12 +349,15 @@ class PaymentProcessor {
                     body: JSON.stringify(orderData)
                 });
                 
-                const responseBody = await response.json();
-                console.log('Response body:', responseBody);
+                const responseJson = await response.json();
+                console.log('Parsed response:', responseJson);
                 
-                if (!response.ok || !responseBody.clientSecret) {
-                    throw new Error(responseBody || 'Fehler beim Erstellen des Payment Intent');
+                if (!response.ok) {
+                    throw new Error(responseJson.message || 'Fehler beim Erstellen des Payment Intent');
                 }
+                
+                return responseJson;
+                
                 
                 return JSON.parse(responseBody);
             } catch (fetchError) {
