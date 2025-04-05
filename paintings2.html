@@ -429,7 +429,7 @@
                     <li><a href="index.html#about">Über uns</a></li>
                     <li><a href="index.html#contact">Kontakt</a></li>
                     <li class="cart-icon">
-                        <a href="index.html#cart">🛒</a>
+                        <a href="javascript:void(0);" id="show-cart-btn">🛒</a>
                         <span class="cart-count">0</span>
                     </li>
                 </ul>
@@ -663,7 +663,118 @@
             <a href="paintings4.html">4</a>
         </div>
     </section>
+ 
+        <!-- Shopping Cart Section -->
+        <section id="cart" class="container" style="display: none; margin-top: 60px;">
+            <div class="section-title">
+                <h2>Ihr Warenkorb</h2>
+            </div>
+            
+            <div style="background: white; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 40px;">
+                <div id="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                    <p id="empty-cart-message">Ihr Warenkorb ist leer.</p>
+                </div>
+                
+                <div id="cart-summary" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; display: none;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Zwischensumme:</span>
+                        <span id="cart-subtotal">CHF 0</span>
+                    </div>
     
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #eee;">
+                        <span>Gesamtsumme:</span>
+                        <span id="cart-total">CHF 0</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <button id="checkout-btn" class="btn" style="width: 100%; display: none;">Zur Kasse</button>
+                    <button id="continue-shopping-btn" class="btn" style="width: 100%; background: #3a3a3a; margin-top: 10px;">Weiter einkaufen</button>
+                </div>
+            </div>
+            
+            <!-- Checkout Form (Hidden Initially) -->
+            <form id="checkout-form" style="background: white; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: none;">
+                <h3 style="margin-bottom: 20px;">Versandinformationen</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="margin-bottom: 20px;">
+                        <label for="first-name" style="display: block; margin-bottom: 5px;">Vorname</label>
+                        <input type="text" id="first-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="last-name" style="display: block; margin-bottom: 5px;">Nachname</label>
+                        <input type="text" id="last-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="address" style="display: block; margin-bottom: 5px;">Adresse</label>
+                    <input type="text" id="address" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                    <div style="margin-bottom: 20px;">
+                        <label for="city" style="display: block; margin-bottom: 5px;">Stadt</label>
+                        <input type="text" id="city" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="state" style="display: block; margin-bottom: 5px;">Bundesland/Kanton</label>
+                        <input type="text" id="state" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="zip" style="display: block; margin-bottom: 5px;">Postleitzahl</label>
+                        <input type="text" id="zip" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 5px;">E-Mail</label>
+                    <input type="email" id="checkout-email" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                </div>
+                
+                <!-- Updated Country Selection - Switzerland Only -->
+                <div style="margin-bottom: 20px;">
+                    <label for="country" style="display: block; margin-bottom: 5px;">Land</label>
+                    <select id="country" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                        <option value="CH" selected>Schweiz</option>
+                    </select>
+                </div>
+                
+                <h3 style="margin: 30px 0 20px;">Zahlungsinformationen</h3>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="card-name" style="display: block; margin-bottom: 5px;">Name auf der Karte</label>
+                    <input type="text" id="card-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="kreditkartendetails" style="display: block; margin-bottom: 5px;">Kreditkartendetails</label>
+                    <div id="kreditkartendetails-container">
+                        <!-- The payment.js script will populate this container -->
+                    </div>
+                    <div id="card-errors" role="alert" style="color: #fa755a; margin-top: 8px; font-size: 14px;"></div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <button id="place-order-btn" type="submit" class="btn" style="width: 100%;">Bestellung aufgeben</button>
+                    <button id="back-to-cart-btn" type="button" class="btn" style="width: 100%; background: #3a3a3a; margin-top: 10px;">Zurück zum Warenkorb</button>
+                </div>
+            </form>
+            
+            <!-- Order Confirmation (Hidden Initially) -->
+            <div id="order-confirmation" style="background: white; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; display: none;">
+                <div style="color: #4CAF50; font-size: 50px; margin-bottom: 20px;">✓</div>
+                <h3 style="margin-bottom: 20px;">Vielen Dank für Ihre Bestellung!</h3>
+                <p style="margin-bottom: 20px;">Ihre Bestellung wurde erfolgreich aufgegeben. Sie erhalten in Kürze eine Bestätigungs-E-Mail.</p>
+                <p style="margin-bottom: 30px;">Bestellnummer: <span id="order-number">BR-2025-1234</span></p>
+                <button id="continue-shopping-confirmation" class="btn">Weiter einkaufen</button>
+            </div>
+        </section>    
+
+
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
