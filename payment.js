@@ -337,7 +337,7 @@ class PaymentProcessor {
             
             // API request to backend
             try {
-                const response = await fetch('https://tatianasgallerie.ch/api/process-payment', {
+                const response = await fetch('/api/process-payment', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

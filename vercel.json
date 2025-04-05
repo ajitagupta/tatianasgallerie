@@ -3,7 +3,7 @@
     "name": "tatianas-gallerie",
     "builds": [
         {
-            "src": "api/server.js",
+            "src": "api/process-payment.js",
             "use": "@vercel/node"
         },
         {
@@ -29,8 +29,8 @@
     ],
     "routes": [
         {
-            "src": "/api/(.*)",
-            "dest": "api/server.js"
+            "src": "/api/process-payment",
+            "dest": "api/process-payment.js"
         },
         {
             "src": "/docs/(.*)",
@@ -46,7 +46,8 @@
         }
     ],
     "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "STRIPE_SECRET_KEY": "@stripe-secret-key"  // assumes this is added to Vercel dashboard
     },
     "github": {
         "silent": true
