@@ -14,22 +14,24 @@ module.exports = async (req, res) => {
     return;
   }
 
+  const amountInCents = Math.round(amount * 100); // CHF to Rappen
+
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: 'chf',
       payment_method: paymentMethodId,
       confirm: true,
-      description: 'Tatianas Gallery Purchase',
+      description: 'Tatianas Gallerie Kauf',
       receipt_email: customerInfo.email,
       metadata: {
         order_id: uuidv4(),
         customer_name: customerInfo.name,
+        customer_email: customerInfo.email,
         shipping_address: `${customerInfo.address.line1}, ${customerInfo.address.postal_code} ${customerInfo.address.city}`,
-        paintings: req.body.itemSummary || items.map(i => `${i.title} (${i.quantity}x)`).join(', ')
+        paintings: items.map(i => `${i.title} (${i.quantity}x)`).join(', ')
       }
     });
-    
 
     if (paymentIntent.status === 'succeeded') {
       res.status(200).json({
@@ -47,6 +49,7 @@ module.exports = async (req, res) => {
       });
     }
   } catch (err) {
+    console.error('Stripe Error:', err);
     res.status(400).json({ message: err.message || 'Stripe error' });
   }
 };
