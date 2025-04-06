@@ -30,7 +30,12 @@ module.exports = async (req, res) => {
         customer_email: customerInfo.email,
         shipping_address: `${customerInfo.address.line1}, ${customerInfo.address.postal_code} ${customerInfo.address.city}`,
         paintings: items.map(i => `${i.title} (${i.quantity}x)`).join(', ')
+      },
+      automatic_payment_methods: {
+        enabled: true,
+        allow_redirects: 'never'
       }
+      
     });
 
     if (paymentIntent.status === 'succeeded') {
