@@ -21,8 +21,7 @@ module.exports = async (req, res) => {
       amount: amountInCents,
       currency: 'chf',
       payment_method: paymentMethodId,
-      confirmation_method: 'manual',
-      confirm: false,
+      confirm: true,
       description: 'Tatianas Gallery Purchase',
       receipt_email: customerInfo.email,
       metadata: {
@@ -36,8 +35,7 @@ module.exports = async (req, res) => {
         address: customerInfo.address
       },
       automatic_payment_methods: {
-        enabled: true,
-        allow_redirects: 'never'
+        enabled: true
       }
     });
 
