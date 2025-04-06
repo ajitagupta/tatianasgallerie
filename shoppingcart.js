@@ -7,7 +7,7 @@ class ShoppingCart {
     constructor() {
         // Warenkorb-Daten initialisieren
         this.cart = [];
-        this.shippingCostPerItem = 1; // CHF 50 Versandkosten pro Artikel
+        this.shippingCostPerItem = 50; // CHF 50 Versandkosten pro Artikel
         
         // DOM-Elemente
         this.cartCount = document.querySelector('.cart-count');
