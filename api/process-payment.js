@@ -35,7 +35,8 @@ module.exports = async (req, res) => {
         address: customerInfo.address
       },
       automatic_payment_methods: {
-        enabled: true
+        enabled: true,
+        allow_redirects: 'never'
       }
     });
 
