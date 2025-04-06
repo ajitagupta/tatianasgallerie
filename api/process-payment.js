@@ -7,61 +7,48 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const { paymentMethodId, amount, items, customerInfo } = req.body;
+  const { paymentMethodId, amount, items, customerInfo, itemSummary } = req.body;
 
   if (!paymentMethodId || !amount || !customerInfo?.email) {
     res.status(400).json({ message: 'Invalid input' });
     return;
   }
 
-  const amountInCents = Math.round(amount * 100); // CHF to Rappen
-
   try {
+    const amountInCents = Math.round(amount * 100);
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: 'chf',
       payment_method: paymentMethodId,
-      confirm: true,
-      description: 'Tatianas Gallerie Kauf',
+      confirmation_method: 'manual',
+      confirm: false,
+      description: 'Tatianas Gallery Purchase',
       receipt_email: customerInfo.email,
       metadata: {
         order_id: uuidv4(),
         customer_name: customerInfo.name,
-        customer_email: customerInfo.email,
         shipping_address: `${customerInfo.address.line1}, ${customerInfo.address.postal_code} ${customerInfo.address.city}`,
-        paintings: items.map(i => `${i.title} (${i.quantity}x)`).join(', ')
+        paintings: itemSummary || items.map(i => `${i.title} (${i.quantity}x)`).join(', ')
+      },
+      shipping: {
+        name: customerInfo.name,
+        address: customerInfo.address
       },
       automatic_payment_methods: {
         enabled: true,
         allow_redirects: 'never'
       }
-      
     });
 
-    if (paymentIntent.status === 'succeeded') {
-      res.status(200).json({
-        success: true,
-        message: 'Payment successful',
-        orderId: paymentIntent.metadata.order_id,
-        clientSecret: paymentIntent.client_secret
-      });
-    } else {
-      res.status(200).json({
-        success: false,
-        requiresAction: true,
-        clientSecret: paymentIntent.client_secret,
-        message: 'Payment requires additional action'
-      });
-    }
-  } catch (err) {
-    console.error('Stripe error:', {
-      message: err.message,
-      code: err.code,
-      type: err.type,
-      decline_code: err.decline_code,
-      raw: err.raw
+    res.status(200).json({
+      success: true,
+      message: 'PaymentIntent created',
+      orderId: paymentIntent.metadata.order_id,
+      clientSecret: paymentIntent.client_secret
     });
-  
+  } catch (err) {
+    console.error('Stripe PaymentIntent Error:', err);
     res.status(400).json({ message: err.message || 'Stripe error' });
   }
 };
