@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
       amount: amountInCents,
       currency: 'chf',
       payment_method: paymentMethodId,
-      confirm: true,
+      confirm: false,
       description: 'Tatianas Gallery Purchase',
       receipt_email: customerInfo.email,
       metadata: {
