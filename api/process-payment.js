@@ -54,7 +54,14 @@ module.exports = async (req, res) => {
       });
     }
   } catch (err) {
-    console.error('Stripe Error:', err);
+    console.error('Stripe error:', {
+      message: err.message,
+      code: err.code,
+      type: err.type,
+      decline_code: err.decline_code,
+      raw: err.raw
+    });
+  
     res.status(400).json({ message: err.message || 'Stripe error' });
   }
 };
