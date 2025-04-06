@@ -16,18 +16,20 @@ module.exports = async (req, res) => {
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100),
-      currency: 'usd',
+      amount: amountInCents,
+      currency: 'chf',
       payment_method: paymentMethodId,
       confirm: true,
-      receipt_email: customerInfo.email,
       description: 'Tatianas Gallery Purchase',
-      metadata: { order_id: uuidv4() },
-      automatic_payment_methods: {
-        enabled: true,
-        allow_redirects: 'never'
-      }      
+      receipt_email: customerInfo.email,
+      metadata: {
+        order_id: uuidv4(),
+        customer_name: customerInfo.name,
+        shipping_address: `${customerInfo.address.line1}, ${customerInfo.address.postal_code} ${customerInfo.address.city}`,
+        paintings: req.body.itemSummary || items.map(i => `${i.title} (${i.quantity}x)`).join(', ')
+      }
     });
+    
 
     if (paymentIntent.status === 'succeeded') {
       res.status(200).json({

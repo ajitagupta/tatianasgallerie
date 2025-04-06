@@ -328,15 +328,29 @@ class PaymentProcessor {
             if (paymentMethodResult.error) {
                 throw new Error(paymentMethodResult.error.message || 'Fehler bei der Erstellung der Zahlungsmethode');
             }
+
+            const customerInfo = {
+                name: `${document.getElementById('first-name').value.trim()} ${document.getElementById('last-name').value.trim()}`,
+                email: document.getElementById('checkout-email')?.value.trim() || '',
+                address: {
+                  line1: document.getElementById('address').value.trim(),
+                  city: document.getElementById('city').value.trim(),
+                  state: document.getElementById('state').value.trim(),
+                  postal_code: document.getElementById('zip').value.trim(),
+                  country: document.getElementById('country').value
+                }
+            };
+            
+            const itemSummary = window.brushstrokesCart?.cart.map(item => 
+                `${item.title} (${item.quantity}x)`
+            ).join(', ');
             
             const orderData = {
                 paymentMethodId: paymentMethodResult.paymentMethod.id,
                 amount: window.brushstrokesCart ? window.brushstrokesCart.calculateTotal() : 0,
-                items: window.brushstrokesCart ? window.brushstrokesCart.cart : [],
-                customerInfo: {
-                    name: document.getElementById('card-name')?.value || 'Unnamed Customer',
-                    email: email
-                }
+                items: window.brushstrokesCart?.cart || [],
+                itemSummary: itemSummary,
+                customerInfo
             };
             
             // API request to backend
