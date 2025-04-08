@@ -633,7 +633,7 @@
                     <div class="product-size">50cm x 50cm</div>
                     <p class="product-description">Eine hervorragende Komposition voller Licht und Transparenz, getönt durch die Farben der Früchte. Der kristallklare Glaskrug im Zentrum wird von saftigen Orangen und einem goldenen Apfel auf warmem, rostrotem Untergrund umrahmt. Der grüne Hintergrund verstärkt die Frische und Lebendigkeit dieses eleganten Stilllebens.</p>
                     <div class="product-meta">
-                        <span class="product-price">CHF 500</span>
+                        <span class="product-price">CHF 680</span>
                         <button class="btn">In den Warenkorb</button>
                     </div>
                 </div>
@@ -832,14 +832,27 @@
             </div>
         </section>
         
-        <!-- About Section -->
+        <!-- About Section with Artist Image -->
         <section id="about" class="about">
             <div class="container">
                 <h2>Über die Künstlerin</h2>
-                <p>Tatiana Venegas ist eine ausgebildete Künstlerin mit Sitz in Zürich, Schweiz, ursprünglich aus Bogota, Kolumbien. Mit einer tiefen künstlerischen Sensibilität schafft sie Kunstwerke, die eine bemerkenswerte Brücke zwischen realistischer Darstellung und emotionalem Ausdruck spannen.</p>
-                <p>Inspiriert von Naturlandschaften, menschlichen Emotionen und urbanen Umgebungen malt Tatiana jedes Gemälde mit höchster Sorgfalt, wobei sie ausschliesslich hochwertige Öl- und Acrylfarben auf gespannter Leinwand verwendet, um Langlebigkeit und künstlerische Lebendigkeit zu garantieren.</p>
-                <p>Ihre Werke haben bereits Anerkennung in lokalen Galerien gefunden und schmücken zahlreiche private Sammlungen im ganzen Land. Von ihrem liebevoll eingerichteten Atelier aus kreiert sie Kunstwerke, die Betrachter emotional berühren und zum Nachdenken anregen.</p>
-                <p>Jeder Verkauf wird mit einem Echtheitszertifikat und einer persönlichen Notiz der Künstlerin begleitet, und für kunstbegeisterte Sammler bietet Tatiana auch individuelle Auftragsarbeiten auf Anfrage an.</p>
+                
+                <!-- Artist image and bio in a flex container -->
+                <div style="display: flex; flex-wrap: wrap; align-items: flex-start; margin-bottom: 30px; gap: 30px;">
+                    <!-- Artist image with styling -->
+                    <div style="flex: 0 0 250px; display: flex; justify-content: center; align-items: center;">
+                        <img src="./images/tatiana.jpg" alt="Tatiana Isabel Venegas" 
+                            style="width: 100%; max-width: 230px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    </div>
+                    
+                    <!-- Artist bio - all text in this column -->
+                    <div style="flex: 1; min-width: 300px;">
+                        <p>Tatiana Venegas ist eine ausgebildete Künstlerin mit Sitz in Zürich, Schweiz, ursprünglich aus Bogota, Kolumbien. Mit einer tiefen künstlerischen Sensibilität schafft sie Kunstwerke, die eine bemerkenswerte Brücke zwischen realistischer Darstellung und emotionalem Ausdruck spannen.</p>
+                        <p>Inspiriert von Naturlandschaften, menschlichen Emotionen und urbanen Umgebungen malt Tatiana jedes Gemälde mit höchster Sorgfalt, wobei sie ausschliesslich hochwertige Öl- und Acrylfarben auf gespannter Leinwand verwendet, um Langlebigkeit und künstlerische Lebendigkeit zu garantieren.</p>
+                        <p>Ihre Werke haben bereits Anerkennung in lokalen Galerien gefunden und schmücken zahlreiche private Sammlungen im ganzen Land. Von ihrem liebevoll eingerichteten Atelier aus kreiert sie Kunstwerke, die Betrachter emotional berühren und zum Nachdenken anregen.</p>
+                        <p>Für kunstbegeisterte Sammler bietet Tatiana auch individuelle Auftragsarbeiten auf Anfrage an.</p>
+                    </div>
+                </div>
             </div>
         </section>
         
